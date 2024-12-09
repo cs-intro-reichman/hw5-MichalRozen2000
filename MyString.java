@@ -53,7 +53,7 @@ public class MyString {
         for (int i = 0; i < str2.length(); i++) {
             boolean found = false; 
             for (int j = 0; j < str1.length(); j++) {
-                if (str1.charAt(j) == str2.charAt(i)) {
+                if (str2.charAt(i) == str1.charAt(j)) {
                     found = true;
                     break;
                 }
@@ -125,8 +125,11 @@ public class MyString {
      */
     public static String remove(String str1, String str2) {
        String newStr = "";
-       if (!subsetOf(str1, str2)){
-        return ""; 
+       if (str2.length() == 0){
+        return str1; 
+       }
+       if (str2.length() == str1.length()){
+        return "";
        }
 
         for (int i = 0 ; i < str1.length() ; i++) {
