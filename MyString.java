@@ -8,15 +8,15 @@ public class MyString {
         String hello = "hello";
         String str = "cat";
         char ch = 's';
-        String str1 = "";
-        String str2 = "space";
+        String str1 = "committee";
+        String str2 = "meet";
         System.out.println(countChar(hello, 'h'));
         System.out.println(countChar(hello, 'l'));
         System.out.println(countChar(hello, 'z'));
         System.out.println(spacedString(hello));
         System.out.println(randomStringOfLetters(5));
         System.out.println(insertRandomly(ch, str));
-        System.out.println(subsetOf(str1, str2));
+        System.out.println(remove(str1, str2));
         //// Put your other tests here.
     }
 
@@ -133,21 +133,21 @@ public class MyString {
        if (str2.length() == 0){
         return str1; 
        }
-       if (str2.length() == str1.length()){
-        return "";
-       }
+       int[] charCheck = new int[256];
 
-        for (int i = 0 ; i < str1.length() ; i++) {
-            boolean found = false;
-            for (int j = 0 ; j < str2.length() ; j++) {
-                if (str1.charAt(i) == str2.charAt(j)) {
-                    found = true;
-                    break;
-                }
-            }
-            if (!found){
-                    newStr += str1.charAt(i);
-                }         
+        for (int i = 0 ; i < str2.length() ; i++) {
+            charCheck[str2.charAt(i)]++;
+        }
+
+            for (int i = 0 ; i < str1.length() ; i++) {
+                char ch = str1.charAt(i);
+              
+            if (charCheck[ch] > 0){
+                    charCheck[ch]--;
+            } else {
+                
+                newStr += ch;
+            }      
         }
         return newStr;
     }
