@@ -8,12 +8,15 @@ public class MyString {
         String hello = "hello";
         String str = "cat";
         char ch = 's';
+        String str1 = "";
+        String str2 = "space";
         System.out.println(countChar(hello, 'h'));
         System.out.println(countChar(hello, 'l'));
         System.out.println(countChar(hello, 'z'));
         System.out.println(spacedString(hello));
         System.out.println(randomStringOfLetters(5));
         System.out.println(insertRandomly(ch, str));
+        System.out.println(subsetOf(str1, str2));
         //// Put your other tests here.
     }
 
@@ -47,20 +50,22 @@ public class MyString {
      * @return true is str1 is a subset of str2, false otherwise
      */
     public static boolean subsetOf(String str1, String str2) {
-        if (str2.length() == 0){
+        if (str1.length() == 0){
             return true;
         }
+        int[] charCheck = new int[256];
+
         for (int i = 0; i < str2.length(); i++) {
-            boolean found = false; 
-            for (int j = 0; j < str1.length(); j++) {
-                if (str2.charAt(i) == str1.charAt(j)) {
-                    found = true;
-                    break;
-                }
-            }
-            if (!found) {
+            charCheck[str2.charAt(i)]++;
+        }
+            for (int i = 0; i < str1.length(); i++) {
+                char ch = str1.charAt(i);
+               if (charCheck[ch] == 0){
                 return false;
+               
+                
             }
+          charCheck[ch]--;
     }
     return true;
 }
