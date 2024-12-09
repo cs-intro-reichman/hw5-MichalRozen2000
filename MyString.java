@@ -1,13 +1,19 @@
+import java.util.Random;
+
 /**
  * A library of string functions.
  */
 public class MyString {
     public static void main(String args[]) {
         String hello = "hello";
+        String str = "cat";
+        char ch = 's';
         System.out.println(countChar(hello, 'h'));
         System.out.println(countChar(hello, 'l'));
         System.out.println(countChar(hello, 'z'));
         System.out.println(spacedString(hello));
+        System.out.println(randomStringOfLetters(5));
+        System.out.println(insertRandomly(ch, str));
         //// Put your other tests here.
     }
 
@@ -20,8 +26,13 @@ public class MyString {
      * @return the number of times c appears in str
      */
     public static int countChar(String str, char ch) {
-        //// Replace the following statement with your code
-        return 0;
+        int count = 0;
+        for (int i = 0 ; i < str.length() ; i++){
+            if (str.charAt(i) == ch){
+                count++;
+            }
+        }
+        return count;
     }
 
     /** Returns true if str1 is a subset string str2, false otherwise
@@ -36,7 +47,18 @@ public class MyString {
      * @return true is str1 is a subset of str2, false otherwise
      */
     public static boolean subsetOf(String str1, String str2) {
-         //// Replace the following statement with your code
+        int index1 = 0;
+        int index2 = 0;
+        
+        while(index1 < str1.length() && index2 < str2.length()){
+            if (str1.charAt(index1) == str2.charAt(index2)){
+                index1++;
+            }
+            index2++;
+        }
+        if (index1 == str1.length()){
+        return true;
+        }
         return false;
     }
 
@@ -49,8 +71,19 @@ public class MyString {
      * @return a string consisting of the characters of str, separated by spaces.
      */
     public static String spacedString(String str) {
-        //// Replace the following statement with your code
-        return null;
+        String newString = "";
+        for (int i = 0 ; i < str.length() ; i++){
+            if (i == str.length() - 1){
+                newString += str.charAt(i);
+            }
+            else {
+                newString += str.charAt(i) + " ";
+            }
+
+        }
+        return newString;
+   
+
     }
   
     /**
@@ -64,8 +97,18 @@ public class MyString {
      * @return a randomly generated string, consisting of 'n' lowercase letters
      */
     public static String randomStringOfLetters(int n) {
-        //// Replace the following statement with your code
-        return null;
+        String str = "";
+        Random random = new Random();
+
+        if (n == 0){
+            return null;
+        }
+        for (int i = 0 ; i < n ; i++){
+             char randomCh = (char) ('a' + random.nextInt(26));
+             str += randomCh;
+        }
+        
+        return str;
     }
 
     /**
@@ -78,9 +121,28 @@ public class MyString {
      * @return a string consisting of str1 minus all the characters of str2
      */
     public static String remove(String str1, String str2) {
-       //// Replace the following statement with your code
-        return null;
+       String newStr = "";
+       if (!subsetOf(str1, str2)){
+        return null; 
+       }
+
+        for (int i = 0 ; i < str1.length() ; i++) {
+            boolean found = false;
+            for (int j = 0 ; j < str2.length() ; j++) {
+                if (str1.charAt(i) == str2.charAt(j)) {
+                    found = true;
+                    break;
+                }
+            }
+            if (!found){
+                    newStr += str1.charAt(i);
+                }         
+        }
+        return newStr;
     }
+
+
+
 
     /**
      * Returns a string consisting of the given string, with the given 
@@ -93,8 +155,8 @@ public class MyString {
     public static String insertRandomly(char ch, String str) {
          // Generate a random index between 0 and str.length()
          int randomIndex = (int) (Math.random() * (str.length() + 1));
-         // Insert the character at the random index
          String result = str.substring(0, randomIndex) + ch + str.substring(randomIndex);
          return result;
     }    
+    
 }
