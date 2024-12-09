@@ -47,20 +47,20 @@ public class MyString {
      * @return true is str1 is a subset of str2, false otherwise
      */
     public static boolean subsetOf(String str1, String str2) {
-        int index1 = 0;
-        int index2 = 0;
-        
-        while(index1 < str1.length() && index2 < str2.length()){
-            if (str1.charAt(index1) == str2.charAt(index2)){
-                index1++;
+        for (int i = 0; i < str2.length(); i++) {
+            boolean found = false; 
+            for (int j = 0; j < str1.length(); j++) {
+                if (str1.charAt(j) == str2.charAt(i)) {
+                    found = true;
+                    break;
+                }
             }
-            index2++;
-        }
-        if (index1 == str1.length()){
-        return true;
-        }
-        return false;
+            if (!found) {
+                return false;
+            }
     }
+    return true;
+}
 
     /** Returns a string which is the same as the given string, with a space
      * character inserted after each character in the given string, except
@@ -101,7 +101,7 @@ public class MyString {
         Random random = new Random();
 
         if (n == 0){
-            return null;
+            return "";
         }
         for (int i = 0 ; i < n ; i++){
              char randomCh = (char) ('a' + random.nextInt(26));
@@ -123,7 +123,7 @@ public class MyString {
     public static String remove(String str1, String str2) {
        String newStr = "";
        if (!subsetOf(str1, str2)){
-        return null; 
+        return ""; 
        }
 
         for (int i = 0 ; i < str1.length() ; i++) {
