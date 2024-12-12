@@ -120,7 +120,7 @@ public class Scrabble {
 			} else { 
 				if (isWordInDictionary(input)) {
 					score += wordScore(input);
-					System.out.println(input+" eraned " + wordScore(input) + " points. Score: " + score + " points\n");
+					System.out.println(input+" earned " + wordScore(input) + " points. Score: " + score + " points\n");
 					hand = MyString.remove(hand, input);
 			} else {
 				System.out.print("No such word in the dictionary. Try again.");
@@ -132,7 +132,7 @@ public class Scrabble {
 		if (hand.length() == 0){
 			System.out.println("Ran out of letters. Total score: " + score + "points");
 		} else {
-			System.out.println("End of Hand. Total score: " + score + " points");
+			System.out.println("End of hand. Total score: " + score + " points");
 		}
 		
 	}
