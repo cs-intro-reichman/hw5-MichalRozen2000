@@ -103,30 +103,38 @@ public class Scrabble {
 		// Declares the variable in to refer to an object of type In, and initializes it to represent
 		// the stream of characters coming from the keyboard. Used for reading the user's inputs.   
 		In in = new In();
-		while (n > 0) {
+		while (hand.length() > 0) {
 			System.out.println("Current Hand: " + MyString.spacedString(hand));
 			System.out.println("Enter a word, or '.' to finish playing this hand:");
 			// Reads the next "token" from the keyboard. A token is defined as a string of 
 			// non-whitespace characters. Whitespace is either space characters, or  
 			// end-of-line characters.
 			String input = in.readString();
-			if (isWordInDictionary(input)){
-				score += wordScore(input);
-				hand = MyString.remove(hand, input);
-				System.out.println(input+" eraned +" + wordScore(input) + " points. Score: " + score + " points" + "\n");
-			} else if (!isWordInDictionary(input) && !input.equals(".")){
-				System.out.println("Invalid word. Try again.");
-			}
+			
 			if (input.equals(".")){
-				n = 0;
+				break;
 			}
-		
+
+			else if (!MyString.subsetOf(input, hand)){
+				System.out.println("Invalid word. Try again.");
+			} else { 
+				if (isWordInDictionary(input)) {
+					score += wordScore(input);
+					System.out.println(input+" eraned " + wordScore(input) + " points. Score: " + score + " points\n");
+					hand = MyString.remove(hand, input);
+			} else {
+				System.out.print("No such word in the dictionary. Try again.");
+
+		    	}	
+				
+			}
 		}
-		if (hand.length() == 0) {
-	        System.out.println("Ran out of letters. Total score: " + score + " points");
+		if (hand.length() == 0){
+			System.out.println("Ran out of letters. Total score: " + score + "points");
 		} else {
-			System.out.println("End of hand. Total score: " + score + " points");
+			System.out.println("End of Hand. Total score: " + score + " points");
 		}
+		
 	}
 
 	// Plays a Scrabble game. Prompts the user to enter 'n' for playing a new hand, or 'e'
@@ -135,17 +143,18 @@ public class Scrabble {
 		
     	init();
 		In in = new In();
-		boolean playing = true;
+		while(true) {
 		System.out.println("Enter n to deal a new hand, or e to end the game:");
-		while(playing) {
-			String input = in.readString();
-			if (input.equals("e")){
-				playing = false;
-			} else if (input.equals("n")) {
+		
+		String input = in.readString();
+			if (input.equals("n")){
 				playHand(createHand());
-				
-			}
+		} else if (input.equals("e")) {
+			break;
+		} else {
+			System.out.println("Invalid input. Please enter n to deal a new hand, or e to end the game:");
 		}
+	  }
 	}
 
 	public static void main(String[] args) {
@@ -187,3 +196,4 @@ public class Scrabble {
 		//playHand("aretiin");
 	}
 }
+
