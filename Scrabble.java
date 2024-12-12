@@ -70,6 +70,7 @@ public class Scrabble {
 		for (int i = 0 ; i < word.length() ; i++ ){
 			score += SCRABBLE_LETTER_VALUES[word.charAt(i) - 97];
 		}
+		score *= word.length();
 		if (word.length() == HAND_SIZE){
 			score += 50;
 		}
@@ -133,11 +134,10 @@ public class Scrabble {
 	public static void playGame() {
 		
     	init();
-
 		In in = new In();
 		boolean playing = true;
 		System.out.println("Enter n to deal a new hand, or e to end the game:");
-		while(true) {
+		while(playing) {
 			String input = in.readString();
 			if (input.equals("e")){
 				playing = false;
